@@ -17,7 +17,7 @@ import java.util.regex.Pattern;
         urlPatterns = {"/LoginServlet"},
         initParams = {
                 @WebInitParam(name = "user", value ="Demo" ),
-                @WebInitParam(name = "password", value ="Demo@123" )
+                @WebInitParam(name = "password", value ="Demo@1234" )
         }
 )
 public class LoginServlet extends HttpServlet {
@@ -38,15 +38,17 @@ public class LoginServlet extends HttpServlet {
                 req.setAttribute("user",user);
                 req.getRequestDispatcher("LoginSuccess.jsp").forward(req, resp);
             }else {
-                RequestDispatcher rq = getServletContext().getRequestDispatcher("/Login.html");
+                RequestDispatcher rq = getServletContext().getRequestDispatcher("/Login.jsp");
                 PrintWriter out = resp.getWriter();
-                out.println("<font color=red>Either username or password is wrong!</font>");
+//                out.println("<font color=red>Either username or password is wrong!</font>");
+                req.setAttribute("error","Either username or password is wrong!");
                 rq.include(req, resp);
             }
         }else {
-            RequestDispatcher rq = getServletContext().getRequestDispatcher("/Login.html");
+            RequestDispatcher rq = getServletContext().getRequestDispatcher("/Login.jsp");
             PrintWriter out = resp.getWriter();
-            out.println("<font color=red>Invalid username or password!</font>");
+//            out.println("<font color=red>Invalid username or password!</font>");
+            req.setAttribute("error","Invalid username or password!");
             rq.include(req, resp);
         }
     }
@@ -56,5 +58,4 @@ public class LoginServlet extends HttpServlet {
         Matcher matcher = pattern.matcher(user);
         return matcher.find();
     }
-
 }

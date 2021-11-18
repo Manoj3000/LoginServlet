@@ -15,7 +15,7 @@
     <div class="container">
         <div class="box">
             <h2>Hi <%= request.getAttribute("user") %>, Login Success</h2>
-            <a href="Login.html">Login Page</a>
+            <a href="Login.jsp">Login Page</a>
         </div>
     </div>
 </body>
